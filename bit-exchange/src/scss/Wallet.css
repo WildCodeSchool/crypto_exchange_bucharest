@@ -1,6 +1,5 @@
 * {
   padding: 0;
-  
 }
 
 .Wallet {
@@ -19,8 +18,8 @@
 }
 
 #koolButtons {
+  background-color: #a9ffff;
   margin-top: 9px;
   margin-bottom: 9px;
-  background-color: #a9ffff;
 }
-/*# sourceMappingURL=App.css.map */
+/*# sourceMappingURL=Wallet.css.map */
