@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import logo from './logo.svg';
 import './App.css';
 import Wallet from './Wallet';
+import EnhancedTable from './EnhancedTable';
 
 
 class App extends React.Component {
@@ -12,11 +12,12 @@ class App extends React.Component {
       canShowWallet: false
     }
   }
+
   render() {
     return (
       <div className="App">
-
-        <Wallet canShow />
+        <Wallet/>
+        <EnhancedTable/>
       </div>
     );
   }
