@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { lighten, makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -11,10 +11,14 @@ import TableSortLabel from '@material-ui/core/TableSortLabel';
 import Paper from '@material-ui/core/Paper';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
+import Api from './Api';
+
 
 function createData(symbol, currency, balance, reserved, total, value, change) {
   return { symbol, currency, balance, reserved, total, value, change };
 }
+
+
 
 const rows = [
   createData('Cupcake', 305, 3.7, 67, 4.3,1,1),
@@ -56,6 +60,8 @@ function getSorting(order, orderBy) {
   return order === 'desc' ? (a, b) => desc(a, b, orderBy) : (a, b) => -desc(a, b, orderBy);
 }
 
+
+
 const headCells = [
   { id: 'symbol', numeric: false, disablePadding: false, label: 'Symbol' },
   { id: 'currency', numeric: false, disablePadding: false, label: 'Currency' },
@@ -66,8 +72,10 @@ const headCells = [
   { id: 'change', numeric: true, disablePadding: false, label: '24H Change' },
 ];
 
+
+
 function EnhancedTableHead(props) {
-  const { classes, order, orderBy, rowCount, onRequestSort } = props;
+  const { classes, order, orderBy, onRequestSort } = props;
   const createSortHandler = property => event => {
     onRequestSort(event, property);
   };
@@ -109,11 +117,6 @@ EnhancedTableHead.propTypes = {
   orderBy: PropTypes.string.isRequired,
   rowCount: PropTypes.number.isRequired,
 };
-
-
-
-
-
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -157,9 +160,6 @@ export default function EnhancedTable() {
     setOrderBy(property);
   };
 
-
-
-
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
@@ -173,14 +173,15 @@ export default function EnhancedTable() {
     setDense(event.target.checked);
   };
 
+  
 
 
   const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
 
   return (
     <div className={classes.root}>
+      <Api/>
       <Paper className={classes.paper}>
-
         <div className={classes.tableWrapper}>
           <Table
             className={classes.table}
@@ -206,9 +207,6 @@ export default function EnhancedTable() {
                       tabIndex={-1}
                       key={row.name}
                     >
-                      <TableCell component="th" scope="row" padding="none">
-                        {row.name}
-                      </TableCell>
                       <TableCell align="left">{row.symbol}</TableCell>
                       <TableCell align="left">{row.currency}</TableCell>
                       <TableCell align="right">{row.balance}</TableCell>
