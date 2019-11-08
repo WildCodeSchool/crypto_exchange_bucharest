@@ -1,6 +1,6 @@
 {
     "version": 3,
-    "mappings": "ACAA,AAAA,OAAO,CAAA;EACH,UAAU,EAAE,MAAM;EAClB,OAAO,EAAE,CAAC;CACb;;AACD,AAAA,UAAU,CAAC;EACX,MAAM,EAAE,IAAI;EACZ,UAAU,EAAE,GAAG;EACf,aAAa,EAAE,GAAG;CAGjB",
+    "mappings": "",
     "sources": [
         "App.scss",
         "scss/Wallet.scss"
