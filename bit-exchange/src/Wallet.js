@@ -4,8 +4,6 @@ import {
     Col,
     Form,
     Button,
-    ToggleButton,
-    ToggleButtonGroup,
     ButtonToolbar
 } from 'react-bootstrap';
 import {
@@ -33,13 +31,13 @@ class Wallet extends React.Component {
                             <Col md={4}>
                                 <ButtonToolbar>
                                     <NavLink className='px-1 py-1' exact to="/balances">
-                                        <Button variant="dark">Balances</Button>
+                                        <Button>Balances</Button>
                                     </NavLink>
                                     <NavLink className='px-1 py-1' exact to="/deposits">
-                                        <Button variant="dark">Deposits</Button>
+                                        <Button>Deposits</Button>
                                     </NavLink>
                                     <NavLink className='px-1 py-1' exact to="/withdrawals">
-                                        <Button variant="dark">Withdrawals</Button>
+                                        <Button>Withdrawals</Button>
                                     </NavLink>
                                 </ButtonToolbar>
                             </Col>
