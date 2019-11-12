@@ -42,11 +42,7 @@ class Wallet extends React.Component {
                                 </ButtonToolbar>
                             </Col>
 
-                            <Col className='py-1' md={5}>
-                                <Form.Control  size="md" placeholder="Find..." />
-                            </Col>
-
-                            <Col  className='py-1'md={3}>
+                            <Col  className='py-2'md={3}>
                                 <Form >
                                     <Form.Check
                                         type="switch"

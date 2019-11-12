@@ -1,39 +1,62 @@
 import React, { Component } from 'react'
 import axios from 'axios';
+import paginationFactory from 'react-bootstrap-table2-paginator';
 import BootstrapTable from 'react-bootstrap-table-next';
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
-import paginationFactory from 'react-bootstrap-table2-paginator';
+import filterFactory, { textFilter } from 'react-bootstrap-table2-filter';
+import 'react-bootstrap-table2-filter/dist/react-bootstrap-table2-filter.min.css';
+
+
 
 const columns = [{
     dataField: 'asset_id',
-    text: 'Symbol'
+    text: 'Symbol',
+    filter: textFilter()
 }, {
     dataField: 'name',
     text: 'Currency',
-    sort: true
+    sort: true,
+    filter: textFilter()
 }, {
     dataField: 'aviableBalance',
     text: 'Aviable Balance',
-    sort: true
+    sort: true,
+    sortFunc: (a, b, order) => {
+        if (order === 'asc') return a - b;
+        else return b - a;
+    }
 }, {
     dataField: 'total',
     text: 'Total',
-    sort: true
+    sort: true,
+    sortFunc: (a, b, order) => {
+        if (order === 'asc') return a - b;
+        else return b - a;
+    }
 }, {
     dataField: 'price_btc',
     text: 'Est. BTC Value',
-    sort: true
+    sort: true,
+    sortFunc: (a, b, order) => {
+        if (order === 'asc') return a - b;
+        else return b - a;
+    }
 }, {
     dataField: 'price_usd',
     text: 'Est. USD Value',
-    sort: true
+    sort: true,
+    sortFunc: (a, b, order) => {
+        if (order === 'asc') return a - b;
+        else return b - a;
+    }
 }, {
-    dataField: 'dayChange',
-    text: '24H Change',
-    sort: true
-}, {
-    dataField: 'actions',
-    text: 'Actions'
+    dataField: 'dayVolume',
+    text: '24H Volume',
+    sort: true,
+    sortFunc: (a, b, order) => {
+        if (order === 'asc') return a - b;
+        else return b - a;
+    },
 }];
 
 export default class Balances extends Component {
@@ -48,31 +71,24 @@ export default class Balances extends Component {
 
     componentDidMount() {
         axios.all([
-            axios.get('https://rest.coinapi.io/v1/assets?apikey=D3D1CCD0-1097-499D-8937-47BF150A7EDB'),
-            axios.get(`https://rest.coinapi.io/v1/exchangerate/BTC/USD?apikey=D3D1CCD0-1097-499D-8937-47BF150A7EDB`)
+            axios.get('https://rest.coinapi.io/v1/assets?apikey=D3D1CCD0-1097-499D-8937-47BF150A7EDB')
         ])
-            .then(axios.spread((x, y) => {
+            .then(axios.spread((x) => {
                 let myStuff = [];
                 let btcCurrentPrice = 0;
-                console.log(x.data)
-                let btc =[];
+                btcCurrentPrice = x.data[x.data.map(e => e.asset_id).indexOf("BTC")]['price_usd'];
                 x.data.map(item => {
-                    // console.log(item.)
-
-                 
                     if ("price_usd" in item && 'asset_id' in item && 'name' in item) {
-                        if(item.name === 'Bitcoin'){
-                            btcCurrentPrice = parseFloat(item[`price_usd`])
-                            
+                        if (item.name === 'Bitcoin') {
                             myStuff.push({
-                                price_usd: parseFloat(item[`price_usd`]),
+                                price_usd: parseFloat(item[`price_usd`]).toFixed(9),
                                 price_btc: 1,
                                 asset_id: item['asset_id'],
-                                name: item['name']
+                                name: item['name'],
+                                dayVolume: item['volume_1hrs_usd'].toFixed(9)
                             })
                         }
-                        
-                        if (item.asset_id !== 'WBTC' &&
+                        else if (item.asset_id !== 'WBTC' &&
                             item.asset_id !== 'WTB' &&
                             item.asset_id !== '4BTC' &&
                             item.asset_id !== 'RBTC' &&
@@ -80,25 +96,15 @@ export default class Balances extends Component {
                             item.asset_id !== 'BTC' &&
                             item.price_usd > 0.03) {
                             myStuff.push({
-                                price_usd: parseFloat(item[`price_usd`], 10),
-                                price_btc:  (parseFloat(item[`price_usd`], 10) / parseFloat(btcCurrentPrice, 10)).toFixed(9),
+                                price_usd: item[`price_usd`].toFixed(9),
+                                price_btc: ((parseFloat(item[`price_usd`], 10) / parseFloat(btcCurrentPrice, 10))).toFixed(9),
                                 asset_id: item['asset_id'],
                                 name: item['name'],
+                                dayVolume: item['volume_1hrs_usd'].toFixed(9)
                             })
-
-
-
-                            console.log([item[`price_usd`], btcCurrentPrice])
-                            // console.log([parseFloat(btcCurrentPrice, 10) ,typeof parseFloat(btcCurrentPrice, 10)])
-
-
-
-
                         }
                     }
                 })
-                console.log(myStuff)
-
                 this.setState(this.state = {
                     apiData: myStuff,
                     coin: myStuff.asset_id,
@@ -123,7 +129,8 @@ export default class Balances extends Component {
                     striped
                     hover
                     condensed
-                    pagination={paginationFactory()}         
+                    pagination={paginationFactory()}
+                    filter={ filterFactory()}
                 />
             </div>
         )
