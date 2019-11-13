@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios';
+import {Col, Form} from 'react-bootstrap';
 import paginationFactory from 'react-bootstrap-table2-paginator';
 import BootstrapTable from 'react-bootstrap-table-next';
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
@@ -11,12 +12,19 @@ import 'react-bootstrap-table2-filter/dist/react-bootstrap-table2-filter.min.css
 const columns = [{
     dataField: 'asset_id',
     text: 'Symbol',
-    filter: textFilter()
+    filter: textFilter(),
+    headerStyle: (colum, colIndex) => {
+        return { width: '90px', textAlign: 'center' };
+    },
+    style: { textAlign: 'center' }
 }, {
     dataField: 'name',
     text: 'Currency',
-    sort: true,
-    filter: textFilter()
+    filter: textFilter(),
+    headerStyle: (colum, colIndex) => {
+        return { width: '210px', textAlign: 'center' };
+    },
+    style: { textAlign: 'center' }
 }, {
     dataField: 'aviableBalance',
     text: 'Aviable Balance',
@@ -24,7 +32,11 @@ const columns = [{
     sortFunc: (a, b, order) => {
         if (order === 'asc') return a - b;
         else return b - a;
-    }
+    },
+    headerStyle: (colum, colIndex) => {
+        return { width: '170px', textAlign: 'center' };
+    },
+    style: { textAlign: 'center' }
 }, {
     dataField: 'total',
     text: 'Total',
@@ -32,7 +44,11 @@ const columns = [{
     sortFunc: (a, b, order) => {
         if (order === 'asc') return a - b;
         else return b - a;
-    }
+    },
+    headerStyle: (colum, colIndex) => {
+        return { width: '150px', textAlign: 'center' };
+    },
+    style: { textAlign: 'center' }
 }, {
     dataField: 'price_btc',
     text: 'Est. BTC Value',
@@ -40,7 +56,11 @@ const columns = [{
     sortFunc: (a, b, order) => {
         if (order === 'asc') return a - b;
         else return b - a;
-    }
+    },
+    headerStyle: (colum, colIndex) => {
+        return { width: '170px', textAlign: 'center' };
+    },
+    style: { textAlign: 'center' }
 }, {
     dataField: 'price_usd',
     text: 'Est. USD Value',
@@ -48,7 +68,11 @@ const columns = [{
     sortFunc: (a, b, order) => {
         if (order === 'asc') return a - b;
         else return b - a;
-    }
+    },
+    headerStyle: (colum, colIndex) => {
+        return { width: '170px', textAlign: 'center' };
+    },
+    style: { textAlign: 'center' }
 }, {
     dataField: 'dayVolume',
     text: '24H Volume',
@@ -57,6 +81,10 @@ const columns = [{
         if (order === 'asc') return a - b;
         else return b - a;
     },
+    headerStyle: (colum, colIndex) => {
+        return { width: '150px', textAlign: 'center' };
+    },
+    style: { textAlign: 'center' }
 }];
 
 export default class Balances extends Component {
@@ -81,11 +109,11 @@ export default class Balances extends Component {
                     if ("price_usd" in item && 'asset_id' in item && 'name' in item) {
                         if (item.name === 'Bitcoin') {
                             myStuff.push({
-                                price_usd: parseFloat(item[`price_usd`]).toFixed(9),
+                                price_usd: parseFloat(item[`price_usd`]).toFixed(2),
                                 price_btc: 1,
                                 asset_id: item['asset_id'],
                                 name: item['name'],
-                                dayVolume: item['volume_1hrs_usd'].toFixed(9)
+                                dayVolume: item['volume_1hrs_usd'].toFixed(3)
                             })
                         }
                         else if (item.asset_id !== 'WBTC' &&
@@ -96,11 +124,11 @@ export default class Balances extends Component {
                             item.asset_id !== 'BTC' &&
                             item.price_usd > 0.03) {
                             myStuff.push({
-                                price_usd: item[`price_usd`].toFixed(9),
+                                price_usd: item[`price_usd`].toFixed(2),
                                 price_btc: ((parseFloat(item[`price_usd`], 10) / parseFloat(btcCurrentPrice, 10))).toFixed(9),
                                 asset_id: item['asset_id'],
                                 name: item['name'],
-                                dayVolume: item['volume_1hrs_usd'].toFixed(9)
+                                dayVolume: item['volume_1hrs_usd'].toFixed(3)
                             })
                         }
                     }
@@ -130,8 +158,17 @@ export default class Balances extends Component {
                     hover
                     condensed
                     pagination={paginationFactory()}
-                    filter={ filterFactory()}
+                    filter={filterFactory()}
                 />
+                <Col  md={3}>
+                    <Form >
+                        <Form.Check
+                            type="switch"
+                            id="custom-switch"
+                            label="Show zero balances"
+                        />
+                    </Form>
+                </Col>
             </div>
         )
     }

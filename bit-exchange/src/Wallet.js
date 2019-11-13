@@ -2,7 +2,6 @@ import React from 'react';
 import {
     Row,
     Col,
-    Form,
     Button,
     ButtonToolbar
 } from 'react-bootstrap';
@@ -42,15 +41,6 @@ class Wallet extends React.Component {
                                 </ButtonToolbar>
                             </Col>
 
-                            <Col  className='py-2'md={3}>
-                                <Form >
-                                    <Form.Check
-                                        type="switch"
-                                        id="custom-switch"
-                                        label="Show zero balances"
-                                    />
-                                </Form>
-                            </Col>
                         </Row>
                         <div className="container" sm='true'>
                                 <Row>
