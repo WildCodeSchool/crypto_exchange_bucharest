@@ -8,6 +8,7 @@ import {
 import {
     Route,
     BrowserRouter,
+    Redirect,
     Switch,
     NavLink
 } from 'react-router-dom';
@@ -30,13 +31,13 @@ class Wallet extends React.Component {
                             <Col md={4}>
                                 <ButtonToolbar>
                                     <NavLink className='px-1 py-1' exact to="/balances">
-                                        <Button>Balances</Button>
+                                        <Button variant="secondary">Balances</Button>
                                     </NavLink>
                                     <NavLink className='px-1 py-1' exact to="/deposits">
-                                        <Button>Deposits</Button>
+                                        <Button variant="secondary">Deposits</Button>
                                     </NavLink>
                                     <NavLink className='px-1 py-1' exact to="/withdrawals">
-                                        <Button>Withdrawals</Button>
+                                        <Button variant="secondary">Withdrawals</Button>
                                     </NavLink>
                                 </ButtonToolbar>
                             </Col>
@@ -54,6 +55,7 @@ class Wallet extends React.Component {
                             <Route path="/withdrawals">
                                     <Withdrawals />
                                 </Route> />
+                                <Redirect to='/'/>
                             </Switch>
                             </Row>
                         </div>

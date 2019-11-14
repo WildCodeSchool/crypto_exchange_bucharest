@@ -1,6 +1,6 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import { Col, Button, ButtonGroup, Form, DropdownButton, Dropdown } from 'react-bootstrap';
 import axios from 'axios';
-import {Col, Form} from 'react-bootstrap';
 import paginationFactory from 'react-bootstrap-table2-paginator';
 import BootstrapTable from 'react-bootstrap-table-next';
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
@@ -86,6 +86,81 @@ const columns = [{
     },
     style: { textAlign: 'center' }
 }];
+const pageButtonRenderer = ({
+    page,
+    active,
+    onPageChange
+}) => {
+    const handleClick = (e) => {
+        e.preventDefault();
+        onPageChange(page);
+    };
+    const activeStyle = {
+        margin : '3px',
+        // left: '200px'
+    };
+    if (active) {
+        activeStyle.filter = 'brightness(75%)';
+
+    }
+    return (
+            <ButtonGroup className="page-item">
+                <Button
+                    variant="secondary"
+                    href="#"
+                    onClick={handleClick}
+                    style={activeStyle}>
+                    {page}
+                </Button>
+            </ButtonGroup>
+
+    );
+};
+
+const sizePerPageRenderer = ({
+    options,
+    currSizePerPage,
+    onSizePerPageChange
+}) => (
+        <div className="btn-group" role="group">
+
+            <DropdownButton
+                drop={'up'}
+                variant="secondary"
+                title={`Show per page`}
+                id={`dropdown-button-drop-up`}
+                key={'up'}>
+                {
+                    options.map(option => (
+
+                        <Dropdown.Item
+                            as='button'
+                            eventKey={option.text}
+                            onClick={() => onSizePerPageChange(option.page)}>
+                            {option.text}
+                        </Dropdown.Item>
+
+                    ))
+                }
+            </DropdownButton>
+            <Col md={{
+                span: 9
+            }} >
+                <Form >
+                    <Form.Check
+                        type="switch"
+                        id="custom-switch"
+                        label="Show zero balances"
+                    />
+                </Form>
+            </Col>
+        </div>
+    );
+
+const options = {
+    pageButtonRenderer,
+    sizePerPageRenderer
+};
 
 export default class Balances extends Component {
     constructor(props) {
@@ -157,18 +232,10 @@ export default class Balances extends Component {
                     striped
                     hover
                     condensed
-                    pagination={paginationFactory()}
+                    pagination={paginationFactory(options)}
                     filter={filterFactory()}
                 />
-                <Col  md={3}>
-                    <Form >
-                        <Form.Check
-                            type="switch"
-                            id="custom-switch"
-                            label="Show zero balances"
-                        />
-                    </Form>
-                </Col>
+
             </div>
         )
     }
