@@ -12,28 +12,26 @@ import 'react-bootstrap-table2-filter/dist/react-bootstrap-table2-filter.min.css
 const columns = [{
     dataField: 'asset_id',
     text: 'Symbol',
-    filter: textFilter(),
-    headerStyle: (colum, colIndex) => {
+    headerStyle: () => {
         return { width: '90px', textAlign: 'center' };
     },
     style: { textAlign: 'center' }
 }, {
     dataField: 'name',
     text: 'Currency',
-    filter: textFilter(),
-    headerStyle: (colum, colIndex) => {
+    headerStyle: () => {
         return { width: '210px', textAlign: 'center' };
     },
     style: { textAlign: 'center' }
 }, {
     dataField: 'aviableBalance',
-    text: 'Aviable Balance',
+    text: 'Available Balance',
     sort: true,
     sortFunc: (a, b, order) => {
         if (order === 'asc') return a - b;
         else return b - a;
     },
-    headerStyle: (colum, colIndex) => {
+    headerStyle: () => {
         return { width: '170px', textAlign: 'center' };
     },
     style: { textAlign: 'center' }
@@ -45,7 +43,7 @@ const columns = [{
         if (order === 'asc') return a - b;
         else return b - a;
     },
-    headerStyle: (colum, colIndex) => {
+    headerStyle: () => {
         return { width: '150px', textAlign: 'center' };
     },
     style: { textAlign: 'center' }
@@ -57,7 +55,7 @@ const columns = [{
         if (order === 'asc') return a - b;
         else return b - a;
     },
-    headerStyle: (colum, colIndex) => {
+    headerStyle: () => {
         return { width: '170px', textAlign: 'center' };
     },
     style: { textAlign: 'center' }
@@ -69,7 +67,7 @@ const columns = [{
         if (order === 'asc') return a - b;
         else return b - a;
     },
-    headerStyle: (colum, colIndex) => {
+    headerStyle: () => {
         return { width: '170px', textAlign: 'center' };
     },
     style: { textAlign: 'center' }
@@ -81,7 +79,7 @@ const columns = [{
         if (order === 'asc') return a - b;
         else return b - a;
     },
-    headerStyle: (colum, colIndex) => {
+    headerStyle: () => {
         return { width: '150px', textAlign: 'center' };
     },
     style: { textAlign: 'center' }
@@ -143,17 +141,6 @@ const sizePerPageRenderer = ({
                     ))
                 }
             </DropdownButton>
-            <Col md={{
-                span: 9
-            }} >
-                <Form >
-                    <Form.Check
-                        type="switch"
-                        id="custom-switch"
-                        label="Show zero balances"
-                    />
-                </Form>
-            </Col>
         </div>
     );
 
@@ -166,55 +153,10 @@ export default class Balances extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            coin: [],
+            coin: this.props.coinz,
             activePage: 1,
-            apiData: {}
+            apiData: this.props.myDataStuff
         }
-    }
-
-    componentDidMount() {
-        axios.all([
-            axios.get('https://rest.coinapi.io/v1/assets?apikey=D3D1CCD0-1097-499D-8937-47BF150A7EDB')
-        ])
-            .then(axios.spread((x) => {
-                let myStuff = [];
-                let btcCurrentPrice = 0;
-                btcCurrentPrice = x.data[x.data.map(e => e.asset_id).indexOf("BTC")]['price_usd'];
-                x.data.map(item => {
-                    if ("price_usd" in item && 'asset_id' in item && 'name' in item) {
-                        if (item.name === 'Bitcoin') {
-                            myStuff.push({
-                                price_usd: parseFloat(item[`price_usd`]).toFixed(2),
-                                price_btc: 1,
-                                asset_id: item['asset_id'],
-                                name: item['name'],
-                                dayVolume: item['volume_1hrs_usd'].toFixed(3)
-                            })
-                        }
-                        else if (item.asset_id !== 'WBTC' &&
-                            item.asset_id !== 'WTB' &&
-                            item.asset_id !== '4BTC' &&
-                            item.asset_id !== 'RBTC' &&
-                            item.asset_id !== 'WBT' &&
-                            item.asset_id !== 'BTC' &&
-                            item.price_usd > 0.03) {
-                            myStuff.push({
-                                price_usd: item[`price_usd`].toFixed(2),
-                                price_btc: ((parseFloat(item[`price_usd`], 10) / parseFloat(btcCurrentPrice, 10))).toFixed(9),
-                                asset_id: item['asset_id'],
-                                name: item['name'],
-                                dayVolume: item['volume_1hrs_usd'].toFixed(3)
-                            })
-                        }
-                    }
-                })
-                this.setState(this.state = {
-                    apiData: myStuff,
-                    coin: myStuff.asset_id,
-                    activePage: 1,
-                    btcPrice: myStuff.btcPrice
-                })
-            }))
     }
 
     handlePageChange(pageNumber) {
@@ -222,6 +164,10 @@ export default class Balances extends Component {
     }
 
     render() {
+        if(this.state.apiData !== this.props.myDataStuff){
+        this.setState({
+            apiData: this.props.myDataStuff
+        })}
         return (
             <div className='Balances container p-1' sm='true'>
                 <br />
