@@ -1,0 +1,152 @@
+/* .darks {
+    background-image: #000000;
+}
+
+.lights .color {
+    background-color: rgb(223, 210, 28) !important;
+    background-image: none;
+} */
+
+
+/* switch bootstrap */
+
+.custom-control-input:checked~.custom-control-label::before {
+    background-color: rgb(255, 255, 255);
+    border-color: rgb(146, 140, 140);
+}
+
+.custom-switch .custom-control-label::before {
+    left: -2.25rem;
+    width: 1.75rem;
+    pointer-events: all;
+    border-radius: 2.5rem;
+    height: 20px;
+    width: 32px;
+    margin-right: -2vmin;
+}
+
+.custom-switch .custom-control-label::after {
+    top: calc(.25rem + 2px);
+    left: calc(-2.25rem + 2px);
+    width: calc(1rem - 0px);
+    height: calc(1rem - 0px);
+    /* background-color: #fce307; */
+    background: #ffffff url('night.png') no-repeat center;
+    border-radius: .5rem;
+    cursor: pointer;
+}
+
+.custom-control-label::before {
+    position: relative;
+}
+
+.custom-control-label {
+    vertical-align: text-top;
+}
+
+.custom-switch .custom-control-input:checked~.custom-control-label::after {
+    background: #ffffff url('day.png') no-repeat center;
+}
+
+.custom-control-input {
+    position: fixed;
+}
+
+.custom-control-input:focus~.custom-control-label::before {
+    box-shadow: -1px -2px 19px -5px rgb(7, 0, 7);
+}
+
+.custom-control-input:focus:not(:checked)~.custom-control-label::before {
+    border-color: transparent;
+}
+
+
+/* css old button */
+
+.switchdiv {
+    /* display: flex; */
+    /* align-items: center; */
+    /* flex-direction: column; */
+    position: relative;
+    float: right;
+    position: sticky;
+    top: 16vmin;
+    cursor: pointer;
+}
+
+
+/* .switch {
+position: relative;
+display: inline-block;
+width: 55px;
+height: 30px;
+align-items: center;
+margin-top: 15px;
+margin-left: auto;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #444a5a;
+    -webkit-transition: .4s;
+    transition: .4s;
+    display: block;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 30px;
+    width: 30px;
+    left: 0px;
+    right: 0px;
+    bottom: 4px;
+    top: 0;
+    bottom: 0;
+    margin: auto 0;
+    -webkit-transition: 0.4s;
+    transition: 0.4s;
+    background: #ffffff url('https://i.ibb.co/FxzBYR9/night.png');
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+input:checked+.slider {
+    background-color: #444a5a;
+}
+
+input:focus+.slider {
+    box-shadow: 0 0 2px #0a0000;
+}
+
+input:checked+.slider:before {
+    -webkit-transform: translateX(24px);
+    -ms-transform: translateX(24px);
+    transform: translateX(24px);
+    background: #000000 url('https://i.ibb.co/7JfqXxB/sunny.png');
+    background-repeat: no-repeat;
+    background-position: center;
+} */
+
+
+/* Rounded sliders */
+
+
+/* .slider {
+    border-radius: 24px;
+}
+
+.slider:before {
+    border-radius: 50%;
+} */
