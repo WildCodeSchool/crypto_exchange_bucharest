@@ -1,16 +1,43 @@
 import React from 'react';
-import logo from './logo.svg';
+import {
+  Route,
+  BrowserRouter,
+  Redirect,
+  Switch,
+  NavLink
+} from 'react-router-dom';
+
+
+import MainPage from './login-page'
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>Salut.</p>
-      </header>
-    </div>
-  );
-}
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      loginVisible: true
+    }
+  }
+  isLoginVisible = (wasPresed) => {
+    if (wasPresed === false) {
+      this.setState({
+        loginVisible: !this.state.loginVisible
+      })
+    }
+  }
+  render() {
+    return (
+      <div className="App">
+        {this.state.loginVisible ?
+          (<MainPage nume={this.isLoginVisible} />)
+          : <h1>YEEEEEEEEEEEEe</h1>}
 
+        {/* <BrowserRouter>
+
+        </BrowserRouter> */}
+        
+      </div>
+    );
+  }
+}
 export default App;
