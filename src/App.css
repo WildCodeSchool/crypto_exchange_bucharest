@@ -20,3 +20,96 @@
 .App-link {
   color: #09d3ac;
 }
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+}
+
+
+/* nav */
+
+#myGoat {
+  width: 11vh;
+  height: 10vh;
+}
+
+.navbar {
+  overflow: hidden;
+  background-color: #1E1D21;
+  position: fixed !important;
+  top: 0;
+  width: 100%;
+  z-index: 1;
+  box-shadow: 2px 12px 17px -5px rgba(0, 0, 0, 0.781);
+}
+
+
+/* navbar hamburger*/
+
+.navbar-light .navbar-toggler {
+  border-color: transparent !important;
+}
+
+.navbar-light .navbar-toggler-icon {
+  background-image: url('https://mdbootstrap.com/img/svg/hamburger2.svg?color=fff') !important;
+}
+
+button:focus {
+  outline: 0px auto -webkit-focus-ring-color !important;
+}
+
+
+/* switch theme */
+
+.dark {
+  background-color: #1E1D21;
+}
+
+.light {
+  background-color: rgb(255, 255, 255) !important;
+  background-image: none;
+}
+
+
+/* link */
+
+.light-color {
+  color: rgb(255, 255, 255);
+  font-weight: bold;
+}
+
+.light-color:hover {
+  color: #a3dae4
+}
+
+.dark-color {
+  color: rgb(255, 255, 255);
+  font-weight: bold;
+}
+
+.dark-color:hover {
+  color: #4f6d72
+}
+
+
+/* body */
+
+.body-text {
+  position: inherit;
+  padding: 30px;
+}
+
+
+/* paragraph */
+
+.whitep {
+  color: white;
+  margin-top: 100px;
+}
+
+.blackp {
+  color: black;
+  margin-top: 100px;
+}

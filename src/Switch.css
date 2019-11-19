@@ -1,0 +1,71 @@
+
+
+.custom-control-input:checked~.custom-control-label::before {
+    background-color: rgb(255, 255, 255);
+    border-color: rgb(146, 140, 140);
+}
+
+.custom-switch .custom-control-label::before {
+    left: -2.25rem;
+    width: 1.75rem;
+    pointer-events: all;
+    border-radius: 2.5rem;
+    height: 20px;
+    width: 32px;
+    margin-right: -2vmin;
+}
+
+.custom-switch .custom-control-label::after {
+    top: calc(.25rem + 2px);
+    left: calc(-2.25rem + 2px);
+    width: calc(1rem - 0px);
+    height: calc(1rem - 0px);
+    background: #ffffff url('night.png') no-repeat center;
+    border-radius: .5rem;
+    cursor: pointer;
+}
+
+.custom-control-label::before {
+    position: relative;
+}
+
+.custom-control-label {
+    vertical-align: text-top;
+}
+
+.custom-switch .custom-control-input:checked~.custom-control-label::after {
+    background: #ffffff url('day.png') no-repeat center;
+}
+
+.custom-switch {
+    padding-left: 0.25rem;
+}
+
+.custom-control-input {
+    position: fixed;
+}
+
+.custom-control-input:focus~.custom-control-label::before {
+    box-shadow: -1px -2px 19px -5px rgb(7, 0, 7);
+}
+
+.custom-control-input:focus:not(:checked)~.custom-control-label::before {
+    border-color: transparent;
+}
+
+
+/* css old button */
+
+.switchdiv {
+    position: relative;
+    float: right;
+    position: sticky;
+    top: 16%;
+    cursor: pointer;
+}
+
+@media only screen and (max-width: 600px) {
+    .switchdiv {
+        top: 16%;
+    }
+}
