@@ -48,6 +48,10 @@
     background: #ffffff url('day.png') no-repeat center;
 }
 
+.custom-switch {
+    padding-left: 0.25rem;
+}
+
 .custom-control-input {
     position: fixed;
 }
@@ -70,8 +74,15 @@
     position: relative;
     float: right;
     position: sticky;
-    top: 16vmin;
+    /* top: 16vmin; */
+    top: 16%;
     cursor: pointer;
+}
+
+@media only screen and (max-width: 600px) {
+    .switchdiv {
+        top: 16%;
+    }
 }
 
 
