@@ -1,0 +1,21 @@
+.card {
+    width: 200px;
+    height: 100px;
+    border: 1px solid black;
+    border-radius: 4px;
+}
+
+.card .name {
+    padding: 8px 12px;
+    font-weight: bold;
+}
+
+.card .name span {
+    margin: 0px 0px 0px 4px;
+    font-weight: normal;
+}
+.card .price {
+    padding: 8px 12px;
+    font-weight: bold;
+}
+

@@ -1,0 +1,41 @@
+{
+  "name": "exchange",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@material-ui/core": "^4.6.0",
+    "apexcharts": "^3.10.0",
+    "bootstrap": "^4.3.1",
+    "eth-lightwallet": "^4.0.0",
+    "isomorphic-fetch": "^2.2.1",
+    "jquery": "^1.9.1",
+    "mdbreact": "^4.22.0",
+    "react": "^16.11.0",
+    "react-apexcharts": "^1.3.3",
+    "react-bootstrap": "^1.0.0-beta.14",
+    "react-dom": "^16.11.0",
+    "react-scripts": "3.2.0",
+    "react-tradingview-widget": "^1.3.2"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
