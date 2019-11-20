@@ -3,7 +3,10 @@ import React, { Component, useState } from 'react';
 import {
     Row,
     Col,
-    Button,
+    Button, 
+    ButtonGroup,
+    DropdownButton,
+    Dropdown
 } from 'react-bootstrap';
 import BootstrapTable from 'react-bootstrap-table-next';
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
@@ -24,7 +27,8 @@ const estimatedHolding = [{
     },
     headerStyle: (colum, colIndex) => {
         return { width: '300px', textAlign: 'center' };
-    }
+    },
+    style: { textAlign: 'center' }
 }, {
     dataField: 'fiat',
     text: 'Fiat Balance',
@@ -35,7 +39,8 @@ const estimatedHolding = [{
     },
     headerStyle: (colum, colIndex) => {
         return { width: '300px', textAlign: 'center' };
-    }
+    },
+    style: { textAlign: 'center' }
 }, {
     dataField: 'total',
     text: 'Total Holding',
@@ -46,7 +51,8 @@ const estimatedHolding = [{
     },
     headerStyle: (colum, colIndex) => {
         return { width: '300px', textAlign: 'center' };
-    }
+    },
+    style: { textAlign: 'center' }
 }, {
     dataField: 'aproxBtcValue',
     text: 'Aprox. BTC Value',
@@ -57,10 +63,11 @@ const estimatedHolding = [{
     },
     headerStyle: (colum, colIndex) => {
         return { width: '300px', textAlign: 'center' };
-    }
+    },
+    style: { textAlign: 'center' }
 }]
 
-const withdrawalsHistory = [{
+const historyColumns = [{
     dataField: 'date',
     text: 'Date',
     sort: true,
@@ -70,14 +77,15 @@ const withdrawalsHistory = [{
     },
     headerStyle: (colum, colIndex) => {
         return { width: '300px', textAlign: 'center' };
-    }
+    },
+    style: { textAlign: 'center' }
 }, {
     dataField: 'asset_id',
     text: 'Symbol',
-    filter: textFilter(),
     headerStyle: (colum, colIndex) => {
         return { width: '300px', textAlign: 'center' };
-    }
+    },
+    style: { textAlign: 'center' }
 }, {
     dataField: 'quantity',
     text: 'Quantity',
@@ -88,17 +96,19 @@ const withdrawalsHistory = [{
     },
     headerStyle: (colum, colIndex) => {
         return { width: '300px', textAlign: 'center' };
-    }
+    },
+    style: { textAlign: 'center' }
 }, {
     dataField: 'status',
     text: 'Status',
     sort: true,
     headerStyle: (colum, colIndex) => {
         return { width: '300px', textAlign: 'center' };
-    }
+    },
+    style: { textAlign: 'center' }
 }];
 
-const pendingWithdrawals = [{
+const pendingColumns = [{
     dataField: 'lastChecked',
     text: 'Last Checked',
     sort: true,
@@ -108,14 +118,15 @@ const pendingWithdrawals = [{
     },
     headerStyle: (colum, colIndex) => {
         return { width: '300px', textAlign: 'center' };
-    }
+    },
+    style: { textAlign: 'center' }
 }, {
     dataField: 'asset_id',
     text: 'Symbol',
-    filter: textFilter(),
     headerStyle: (colum, colIndex) => {
         return { width: '300px', textAlign: 'center' };
-    }
+    },
+    style: { textAlign: 'center' }
 }, {
     dataField: 'quantity',
     text: 'Quantity',
@@ -126,7 +137,8 @@ const pendingWithdrawals = [{
     },
     headerStyle: (colum, colIndex) => {
         return { width: '300px', textAlign: 'center' };
-    }
+    },
+    style: { textAlign: 'center' }
 }, {
     dataField: 'confirmations',
     text: 'Confirmations',
@@ -137,9 +149,9 @@ const pendingWithdrawals = [{
     },
     headerStyle: (colum, colIndex) => {
         return { width: '300px', textAlign: 'center' };
-    }
+    },
+    style: { textAlign: 'center' }
 }];
-
 
 function Example() {
     const [show, setShow] = useState(false);
@@ -150,7 +162,7 @@ function Example() {
     return (
         <>
             <Button variant="primary" onClick={handleShow}>
-                Withdrawals
+                Deposits
         </Button>
 
             <Modal show={show} onHide={handleClose}>
@@ -163,7 +175,7 @@ function Example() {
                         Cancel
             </Button>
                     <Button variant="primary" onClick={handleClose}>
-                        Withdraw
+                        Deposit
             </Button>
                 </Modal.Footer>
             </Modal>
@@ -171,37 +183,103 @@ function Example() {
     );
 }
 
+const pageButtonRenderer = ({
+    page,
+    active,
+    onPageChange
+}) => {
+    const handleClick = (e) => {
+        e.preventDefault();
+        onPageChange(page);
+    };
+    const activeStyle = {
+        margin: '3px',
+        // left: '200px'
+    };
+    if (active) {
+        activeStyle.filter = 'brightness(75%)';
+
+    }
+    return (
+        <ButtonGroup className="page-item">
+            <Button
+                variant="secondary"
+                href="#"
+                onClick={handleClick}
+                style={activeStyle}>
+                {page}
+            </Button>
+        </ButtonGroup>
+
+    );
+};
+
+const sizePerPageRenderer = ({
+    options,
+    currSizePerPage,
+    onSizePerPageChange
+}) => (
+        <div className="btn-group" role="group">
+
+            <DropdownButton
+                drop={'up'}
+                variant="secondary"
+                title={`Show per page`}
+                id={`dropdown-button-drop-up`}
+                key={'up'}>
+                {
+
+                    options.map(option => (
+
+                        <Dropdown.Item
+                            as='button'
+                            eventKey={option.text}
+                            onClick={() => onSizePerPageChange(option.page)}>
+                            {option.text}
+                        </Dropdown.Item>
+
+                    ))
+                }
+            </DropdownButton>
+        </div>
+    );
+
+const options = {
+    pageButtonRenderer,
+    sizePerPageRenderer
+};
+
 export default class Withdrawals extends Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            coin: this.props.coinz,
+            activePage: 1,
+            apiData: this.props.myDataStuff
+        }
+    }
     render() {
         return (
             <div className='Withdrawals container'>
-
-                <br />
+   <br />
                 <Row>
                     <Col>
-                        <h3>Pendding Withdrawals</h3>
+                        <h3>Estimated Holdings</h3>
                     </Col>
-
-                    <Col md={{ span: 0 }}>
+                    <Col>
+                        <h3>BTC:</h3> {this.estimatedHolding}
+                    </Col>
+                    <Col>
+                        <h3>USD:</h3> {this.estimatedHolding}
+                    </Col>
+                    <Col md={{ span: 1, offset: 1 }}>
                         <Example />
                     </Col>
                 </Row>
                 <br />
                 <Row>
-                    <BootstrapTable
-                        keyField="id"
-                        data={myLocalData}
-                        columns={pendingWithdrawals}
-                        striped
-                        hover
-                        condensed
-                        filter={filterFactory()}
-                    />
-                </Row>
-                <br />
-                <Row>
                     <Col>
-                        <h3>Estimated Holdings</h3>
+                        <h3>Pendding Withdrawals</h3>
                     </Col>
                 </Row>
                 <br />
@@ -209,30 +287,30 @@ export default class Withdrawals extends Component {
                     <BootstrapTable
                         keyField="id"
                         data={myLocalData}
-                        columns={estimatedHolding}
+                        columns={pendingColumns}
                         striped
                         hover
                         condensed
-                        filter={filterFactory()}
+                        filter={myLocalData.length ? filterFactory() : null}
                     />
                 </Row>
                 <br />
                 <Row>
                     <Col>
-                        <h3>Withdrawal History</h3>
+                        <h3>Withdrawals History</h3>
                     </Col>
                 </Row>
                 <br />
                 <Row>
                     <BootstrapTable
                         keyField="id"
-                        data={myLocalData}
-                        columns={withdrawalsHistory}
+                        data={this.state.apiData}
+                        columns={historyColumns}
                         striped
                         hover
                         condensed
-                        pagination={paginationFactory()}
-                        filter={filterFactory()}
+                        pagination={paginationFactory(options)}
+                        filter={this.state.apiData.length > 0  ? filterFactory() : null}
                     />
                 </Row>
             </div>

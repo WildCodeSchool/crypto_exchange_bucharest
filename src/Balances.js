@@ -179,7 +179,7 @@ export default class Balances extends Component {
                     hover
                     condensed
                     pagination={paginationFactory(options)}
-                    filter={filterFactory()}
+                    filter={this.state.apiData.length > 0  ? filterFactory() : null}
                 />
 
             </div>

@@ -3,7 +3,9 @@ import {
     Row,
     Col,
     Button,
-    ButtonToolbar
+    ButtonGroup,
+    DropdownButton,
+    Dropdown
 } from 'react-bootstrap';
 import BootstrapTable from 'react-bootstrap-table-next';
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
@@ -80,7 +82,6 @@ const historyColumns = [{
 }, {
     dataField: 'asset_id',
     text: 'Symbol',
-    filter: textFilter(),
     headerStyle: (colum, colIndex) => {
         return { width: '300px', textAlign: 'center' };
     },
@@ -122,7 +123,6 @@ const pendingColumns = [{
 }, {
     dataField: 'asset_id',
     text: 'Symbol',
-    filter: textFilter(),
     headerStyle: (colum, colIndex) => {
         return { width: '300px', textAlign: 'center' };
     },
@@ -183,17 +183,104 @@ function Example() {
     );
 }
 
+const pageButtonRenderer = ({
+    page,
+    active,
+    onPageChange
+}) => {
+    const handleClick = (e) => {
+        e.preventDefault();
+        onPageChange(page);
+    };
+    const activeStyle = {
+        margin: '3px',
+        // left: '200px'
+    };
+    if (active) {
+        activeStyle.filter = 'brightness(75%)';
+
+    }
+    return (
+        <ButtonGroup className="page-item">
+            <Button
+                variant="secondary"
+                href="#"
+                onClick={handleClick}
+                style={activeStyle}>
+                {page}
+            </Button>
+        </ButtonGroup>
+
+    );
+};
+
+const sizePerPageRenderer = ({
+    options,
+    currSizePerPage,
+    onSizePerPageChange
+}) => (
+        <div className="btn-group" role="group">
+
+            <DropdownButton
+                drop={'up'}
+                variant="secondary"
+                title={`Show per page`}
+                id={`dropdown-button-drop-up`}
+                key={'up'}>
+                {
+
+                    options.map(option => (
+
+                        <Dropdown.Item
+                            as='button'
+                            eventKey={option.text}
+                            onClick={() => onSizePerPageChange(option.page)}>
+                            {option.text}
+                        </Dropdown.Item>
+
+                    ))
+                }
+            </DropdownButton>
+        </div>
+    );
+
+const options = {
+    pageButtonRenderer,
+    sizePerPageRenderer
+};
+
 export default class Deposits extends Component {
+
+    constructor(props) {
+        super(props)
+        this.state = {
+            coin: this.props.coinz,
+            activePage: 1,
+            apiData: this.props.myDataStuff
+        }
+    }
     render() {
         return (
             <div className='Deposits container'>
                 <br />
                 <Row>
                     <Col>
-                        <h3>Pendding Deposits</h3>
+                        <h3>Estimated Holdings</h3>
+                    </Col>
+                    <Col>
+                        <h3>BTC:</h3> {this.estimatedHolding}
+                    </Col>
+                    <Col>
+                        <h3>USD:</h3> {this.estimatedHolding}
                     </Col>
                     <Col md={{ span: 1, offset: 1 }}>
-                        <Example/>
+                        <Example />
+                    </Col>
+                </Row>
+                <br />
+                <Row>
+                    <Col>
+                        <h3>Pendding Deposits</h3>
                     </Col>
                 </Row>
                 <br />
@@ -211,24 +298,6 @@ export default class Deposits extends Component {
                 <br />
                 <Row>
                     <Col>
-                        <h3>Estimated Holdings</h3>
-                    </Col>
-                </Row>
-                <br />
-                <Row>
-                    <BootstrapTable
-                        keyField="id"
-                        data={myLocalData}
-                        columns={estimatedHolding}
-                        striped
-                        hover
-                        condensed
-                        filter={filterFactory()}
-                    />
-                </Row>
-                <br />
-                <Row>
-                    <Col>
                         <h3>Deposit History</h3>
                     </Col>
                 </Row>
@@ -236,13 +305,13 @@ export default class Deposits extends Component {
                 <Row>
                     <BootstrapTable
                         keyField="id"
-                        data={myLocalData}
+                        data={this.state.apiData}
                         columns={historyColumns}
                         striped
                         hover
                         condensed
-                        pagination={paginationFactory()}
-                        filter={filterFactory()}
+                        pagination={paginationFactory(options)}
+                        filter={this.state.apiData.length > 0  ? filterFactory() : null}
                     />
                 </Row>
             </div>

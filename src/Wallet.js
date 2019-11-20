@@ -117,10 +117,10 @@ class Wallet extends React.Component {
                                         <Balances myDataStuff = {this.state.apiData} coinz={this.state.coin} />
                                     </Route> />
                             <Route path="/deposits">
-                                        <Deposits />
+                                        <Deposits myDataStuff = {this.state.apiData} coinz={this.state.coin} />
                                     </Route> />
                             <Route path="/withdrawals">
-                                        <Withdrawals />
+                                        <Withdrawals myDataStuff = {this.state.apiData} coinz={this.state.coin} />
                                     </Route> />
                                 <Redirect to='/balances' />
                                 </Switch>
