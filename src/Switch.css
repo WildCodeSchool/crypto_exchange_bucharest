@@ -1,28 +1,26 @@
-
-
 .custom-control-input:checked~.custom-control-label::before {
-    background-color: rgb(255, 255, 255);
-    border-color: rgb(146, 140, 140);
+    background-color: rgb(255, 255, 255) !important;
+    border-color: rgb(146, 140, 140) !important;
 }
 
 .custom-switch .custom-control-label::before {
-    left: -2.25rem;
-    width: 1.75rem;
-    pointer-events: all;
-    border-radius: 2.5rem;
-    height: 20px;
-    width: 32px;
-    margin-right: -2vmin;
+    left: -2.25rem !important;
+    width: 1.75rem !important;
+    pointer-events: all !important;
+    border-radius: 2.5rem !important;
+    height: 20px !important;
+    width: 32px !important;
+    margin-right: -2vmin !important;
 }
 
 .custom-switch .custom-control-label::after {
-    top: calc(.25rem + 2px);
-    left: calc(-2.25rem + 2px);
-    width: calc(1rem - 0px);
-    height: calc(1rem - 0px);
-    background: #ffffff url('night.png') no-repeat center;
-    border-radius: .5rem;
-    cursor: pointer;
+    top: calc(.25rem + 2px) !important;
+    left: calc(-2.25rem + 2px) !important;
+    width: calc(1rem - 0px) !important;
+    height: calc(1rem - 0px) !important;
+    background: #ffffff url('day.png') no-repeat center !important;
+    border-radius: .5rem !important;
+    cursor: pointer !important;
 }
 
 .custom-control-label::before {
@@ -34,7 +32,7 @@
 }
 
 .custom-switch .custom-control-input:checked~.custom-control-label::after {
-    background: #ffffff url('day.png') no-repeat center;
+    background: #ffffff url('night.png') no-repeat center !important;
 }
 
 .custom-switch {
@@ -46,26 +44,29 @@
 }
 
 .custom-control-input:focus~.custom-control-label::before {
-    box-shadow: -1px -2px 19px -5px rgb(7, 0, 7);
+    box-shadow: -1px -2px 19px -5px rgb(7, 0, 7) !important;
 }
 
 .custom-control-input:focus:not(:checked)~.custom-control-label::before {
-    border-color: transparent;
+    border-color: transparent !important;
 }
 
 
 /* css old button */
 
 .switchdiv {
-    position: relative;
+    position: absolute;
     float: right;
-    position: sticky;
+    /* position: sticky; */
     top: 16%;
     cursor: pointer;
+    z-index: 1;
+    right: 2%;
+    background: transparent !important;
 }
 
 @media only screen and (max-width: 600px) {
     .switchdiv {
-        top: 16%;
+        top: 16% !important;
     }
 }

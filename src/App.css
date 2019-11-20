@@ -1,135 +1,143 @@
 .App {
-  text-align: center;
+    text-align: center;
 }
 
 .App-logo {
-  height: 40vmin;
+    height: 40vmin;
 }
 
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+    background-color: #282c34;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
 }
 
 .App-link {
-  color: #09d3ac;
+    color: #09d3ac;
 }
+
 body {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  width: 100%;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
 }
 
 
 /* nav */
 
-#myGoat {
-  width: 11vh;
-  height: 10vh;
+img {
+    width: 11vh;
+    height: 10vh;
 }
 
 .navbar {
-  overflow: hidden;
-  background-color: #1E1D21;
-  position: fixed !important;
-  top: 0;
-  width: 100%;
-  z-index: 1;
-  box-shadow: 2px 12px 17px -5px rgba(0, 0, 0, 0.781);
+    overflow: hidden;
+    background-color: #1E1D21;
+    position: relative !important;
+    top: 0;
+    width: 100%;
+    z-index: 1;
+    box-shadow: 2px 12px 17px -5px rgba(0, 0, 0, 0.781);
+}
+
+h4 {
+    padding: 8px;
 }
 
 
 /* navbar hamburger*/
 
 .navbar-light .navbar-toggler {
-  border-color: transparent !important;
+    border-color: transparent !important;
 }
 
 .navbar-light .navbar-toggler-icon {
-  background-image: url('https://mdbootstrap.com/img/svg/hamburger2.svg?color=fff') !important;
+    background-image: url('https://mdbootstrap.com/img/svg/hamburger2.svg?color=fff') !important;
 }
 
 button:focus {
-  outline: 0px auto -webkit-focus-ring-color !important;
+    outline: 0px auto -webkit-focus-ring-color;
 }
 
 
 /* switch theme */
 
 .dark {
-  background-color: #1E1D21;
+    background-color: #1E1D21;
 }
 
 .light {
-  background-color: rgb(255, 255, 255) !important;
-  background-image: none;
+    background-color: rgb(255, 255, 255);
+    background-image: none;
 }
 
 
 /* link */
 
 .light-color {
-  color: rgb(255, 255, 255);
-  font-weight: bold;
+    color: rgb(255, 255, 255);
+    font-weight: bold;
 }
 
 .light-color:hover {
-  color: #a3dae4
+    color: #f14b09
 }
 
 .dark-color {
-  color: rgb(255, 255, 255);
-  font-weight: bold;
+    color: rgb(255, 255, 255);
+    font-weight: bold;
 }
 
 .dark-color:hover {
-  color: #4f6d72
+    color: #f14b09
 }
 
 
 /* body */
 
 .body-text {
-  position: inherit;
-  padding: 30px;
+    position: inherit;
+    padding: 30px;
 }
 
 
 /* paragraph */
 
 .whitep {
-  color: white;
-  margin-top: 100px;
+    color: white;
+    margin-top: 100px;
 }
 
 .blackp {
-  color: black;
-  margin-top: 100px;
+    color: black;
+    margin-top: 100px;
 }
+
 .caret {
-  display: inline-block;
-  width: 0;
-  height: 0;
-  margin-left: 2px;
-  vertical-align: middle;
-  border-top: 4px dashed;
-  border-top: 4px solid \9;
-  border-right: 4px solid transparent;
-  border-left: 4px solid transparent;
+    display: inline-block;
+    width: 0;
+    height: 0;
+    margin-left: 2px;
+    vertical-align: middle;
+    border-top: 4px dashed;
+    border-top: 4px solid \9;
+    border-right: 4px solid transparent;
+    border-left: 4px solid transparent;
 }
 
 .dropup .caret,
 .navbar-fixed-bottom .dropdown .caret {
-  border-top: 0;
-  border-bottom: 4px dashed;
-  border-bottom: 4px solid \9;
-  content: "";
+    border-top: 0;
+    border-bottom: 4px dashed;
+    border-bottom: 4px solid \9;
+    content: "";
 }
+
+
 /*# sourceMappingURL=App.css.map */

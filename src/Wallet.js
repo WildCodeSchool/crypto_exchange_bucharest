@@ -93,13 +93,13 @@ class Wallet extends React.Component {
                                 </ButtonToolbar>
                             </Col>
                             <Col>
-                            <Form.Group className='py-2'>
+                            {/* <Form.Group className='py-2'>
                                 <Form.Check
                                     type="switch"
-                                    id="custom-switch"
+                                    id="custom-switch2"
                                     label="Show zero balances"
                                 />
-                            </Form.Group>
+                            </Form.Group> */}
                             </Col>
                             <Col>
                             <Form>

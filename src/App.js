@@ -7,8 +7,6 @@ import {
   NavLink,
 } from 'react-router-dom';
 import { Navbar, Nav, Button } from 'react-bootstrap';
-
-
 import MainPage from './login-page'
 import './App.css';
 import NavSwitch from './Switch';
@@ -17,13 +15,18 @@ import './App.css';
 import Wallet from './Wallet';
 
 
+
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      loginVisible: true
+      loginVisible: true,
+      dark: false
     }
   }
+  handleClick = () => {
+    this.setState({ dark: !this.state.dark })
+}
   isLoginVisible = (wasPresed) => {
     if (wasPresed === false) {
       this.setState({
@@ -33,23 +36,24 @@ class App extends React.Component {
   }
   render() {
     return (
-      <div className="App">
+      <div className="App" style={this.state.dark ? {backgroundColor: 'white'} :
+      {backgroundColor: 'black'}}>
         {this.state.loginVisible ?
           (<MainPage nume={this.isLoginVisible} />)
           :
           <BrowserRouter>
 
             <div>
-              <Navbar expand="lg">
-                <Navbar.Brand href="#home"><img id="myGoat" alt='' src={this.props.goat} /></Navbar.Brand>
+              <Navbar expand="lg" >
+                <Navbar.Brand href="#home"><img id="goat" alt='' src={require('./goat.png')} /></Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                   <div class="font ml-auto" >
                     <Nav>
-                      <NavLink to="/markets"><h4 className={this.props.dark ? 'light-color' : 'dark-color'}>Markets</h4></NavLink>
-                      <NavLink to="/orders"><h4 className={this.props.dark ? 'light-color' : 'dark-color'}>Orders</h4></NavLink>
-                      <NavLink to="/wallet"><h4 className={this.props.dark ? 'light-color' : 'dark-color'}>Wallet</h4></NavLink>
-                      <NavLink to="/log-in"><h4 className={this.props.dark ? 'light-color' : 'dark-color'}>Log In</h4></NavLink>
+                      <NavLink to="/markets"><h4 className={this.state.dark ? 'light-color' : 'dark-color'}>Markets</h4></NavLink>
+                      <NavLink to="/orders"><h4 className={this.state.dark ? 'light-color' : 'dark-color'}>Orders</h4></NavLink>
+                      <NavLink to="/wallet"><h4 className={this.state.dark ? 'light-color' : 'dark-color'}>Wallet</h4></NavLink>
+                      <NavLink to="/log-in"><h4 className={this.state.dark ? 'light-color' : 'dark-color'}>Log In</h4></NavLink>
                     </Nav>
                   </div>
                 </Navbar.Collapse>
@@ -58,7 +62,7 @@ class App extends React.Component {
                 <NavSwitch dark={this.state.dark} handle={this.handleClick} />
               </div>
             </div>
-            <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+            <div>
             <Switch>
               <Route path="/markets">
                 <h1>Markets</h1>
@@ -70,6 +74,7 @@ class App extends React.Component {
                 <Wallet/>
               </Route>
             </Switch>
+            </div>
           </BrowserRouter>
         }
 

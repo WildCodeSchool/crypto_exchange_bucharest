@@ -21,7 +21,7 @@ class NavSwitch extends Component {
             <Form className={`switchdiv ${this.props.dark ? 'dark' : 'light'}`}>
                 <Form.Check
                     type="switch"
-                    id="custom-switch"
+                    id="custom-switch3"
                     label=""
                     onClick={this.props.handle}
                 />
