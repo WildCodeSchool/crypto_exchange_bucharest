@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="VcsDirectoryMappings">
+    <mapping directory="$PROJECT_DIR$" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Cryptocurrency-charts" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/ReactSlideshow" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/react-router" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/react_bitcoin_ticker" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/ticker" vcs="Git" />
+  </component>
+</project>

@@ -79,7 +79,7 @@ class Wallet extends React.Component {
                 <div className="container" sm="true" id="walletNav" >
                     <BrowserRouter>
                         <Row id="koolButtons">
-                            <Col md={4}>
+                            <Col md={5}>
                                 <ButtonToolbar>
                                     <NavLink className='px-1 py-1' exact to="/balances">
                                         <Button variant="secondary">Balances</Button>
@@ -92,18 +92,10 @@ class Wallet extends React.Component {
                                     </NavLink>
                                 </ButtonToolbar>
                             </Col>
-                            <Col>
-                            <Form.Group className='py-2'>
-                                <Form.Check
-                                    type="switch"
-                                    id="custom-switch"
-                                    label="Show zero balances"
-                                />
-                            </Form.Group>
-                            </Col>
-                            <Col>
-                            <Form>
-                                <Form.Group className='px-1 py-1'>
+                           
+                            <Col md={{span: 3, offset:3}}>
+                            <Form  >
+                                <Form.Group className='px-1 py-1' >
                                     <Form.Control type="textarea" placeholder="Search for an asset..." />
                                 </Form.Group>
                             </Form>
@@ -132,5 +124,5 @@ class Wallet extends React.Component {
         );
     }
 }
-
+ 
 export default Wallet;

@@ -1,5 +1,13 @@
 import React, { Component } from 'react';
-import './pure.css';
+import {
+    Row,
+    Col,
+    Button,
+    Image,
+    Form,
+    ButtonToolbar
+} from 'react-bootstrap';
+import loginImage from './login_background.jpg'
 
 class MainPage extends Component {
 
@@ -8,22 +16,34 @@ class MainPage extends Component {
     }
     render() {
         return (
-            <div className="login">
-                <img className="image" src='https://images.unsplash.com/photo-1513569771920-c9e1d31714af?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2734&q=80' />
-                <div className="container">
-                    <div className="text">
-                        <form class="pure-form pure-form-stacked">
-                            <input id="email" type="email" placeholder="Email" />
-                            <br></br><br></br>
-                            <input id="password" type="password" placeholder="Password" />
-                            <label className="Checkbox" for="remember" class="pure-checkbox">
-                                <input id="remember" type="checkbox" />Remember me
-                            </label>
-                            <button onClick={this.handleClick} class="pure-button pure-button-primary">Sign in</button>
-                        </form>
-                    </div>
+            <div className="loginPage">
+                {/* <Image className="loginImage" src={loginImage}/> */}
+                <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+                <div className="text">
+                    <Row>
+                        <Col md={{ span: 4, offset: 4 }} xs={{ span: 4, offset: 4 }}>
+                            <Form>
+                                <Form.Group className='loginForm'>
+                                    <Form.Control type="textarea" placeholder="Username" />
+                                </Form.Group>
+                            </Form>
+                        </Col>
+                    </Row>
+
+                    <Row>
+                        <Col md={{ span: 4, offset: 4 }} xs={{ span: 4, offset: 4 }}>
+                            <Form>
+                                <Form.Group className='loginForm'>
+                                    <Form.Control type="password" placeholder="Password" />
+                                </Form.Group>
+                            </Form>
+                        </Col>
+                    </Row>
+                    <button onClick={this.handleClick} variant="primary">Sign in</button>
                 </div>
+                <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br/><br /><br />
             </div>
+
         )
     }
 }
