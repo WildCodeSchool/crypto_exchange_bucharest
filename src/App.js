@@ -12,6 +12,9 @@ import { Navbar, Nav, Button } from 'react-bootstrap';
 import MainPage from './login-page'
 import './App.css';
 import NavSwitch from './Switch';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './App.css';
+import Wallet from './Wallet';
 
 
 class App extends React.Component {
@@ -64,7 +67,7 @@ class App extends React.Component {
                 <h1>Orders</h1>
               </Route>
               <Route path="/wallet">
-                <h1>Wallet</h1>
+                <Wallet/>
               </Route>
             </Switch>
           </BrowserRouter>
